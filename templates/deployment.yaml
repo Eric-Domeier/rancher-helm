@@ -36,7 +36,8 @@ spec:
           drop:
 {{ toYaml .Values.capabilitiesDrop | indent 12}}
         runAsNonRoot: {{ .Values.runAsNonRoot }}
-        seccompProfile: {{ .Values.seccompProfile }}
+        seccompProfile: 
+          type: {{ .Values.seccompProfile }}
       priorityClassName: {{ .Values.priorityClassName }}
       serviceAccountName: {{ template "rancher.fullname" . }}
 {{- if .Values.imagePullSecrets }}
