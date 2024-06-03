@@ -30,6 +30,13 @@ spec:
         app: {{ template "rancher.fullname" . }}
         release: {{ .Release.Name }}
     spec:
+      securityContext:
+        allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+        capabilities:
+          drop:
+{{ toYaml .Values.capabilitiesDrop | indent 12}}
+        runAsNonRoot: {{ .Values.runAsNonRoot }}
+        seccompProfile: {{ .Values.seccompProfile }}
       priorityClassName: {{ .Values.priorityClassName }}
       serviceAccountName: {{ template "rancher.fullname" . }}
 {{- if .Values.imagePullSecrets }}
